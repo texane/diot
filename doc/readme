@@ -1,0 +1,58 @@
+. raison d etre
+ . Windows NT is a closed source kernel supporting nearly every desktop and laptop devices
+ . having such a support in the opensource world is becoming more and more important
+ . diot aims at improving opensource software support for proprietary hardware
+
+. design
+ . diot stands for device io tracing
+ . diot relies upon the fact that device memory can be accessed in the 2 following ways on x86:
+  . memory mapped ios
+  . io ports
+ . by monitoring those accesses, diot is able to produce logs
+ . device informations can then be deduced from those logs
+ . since Windows NT is a closed source kernel, diot uses hooking techniques for monitoring
+  . because of that, diot may put your machine into an unstable state
+
+. building diot from sources
+. diot is made of 3 components contained in 3 directories:
+ . sys/
+  . the diot kernel part
+  . built using the windows driver kit 6001.18000
+  . in a wdk prompt, type build. it should produce ../bin/i386/diot.sys
+ . dll/
+  . a dynamic library implementing the diot api as exposed in common/diotApi.h
+  . compiled with microsoft cl 15.00.21022.08 (visual 2008)
+  . in build/, type nmake re. it should produce ../bin/diot.dll and ../bin/diot.lib
+ . exe/
+  . a userland application using diot.dll
+  . compiled with microsoft cl 15.00.21022.08 (visual 2008)
+  . in build/, type nmake re. it should produce ../bin/diot.exe
+  . it depends on the diot library, so build the library first
+
+. running diot
+ . before running diot remember that this is a highly experimental project
+  . on crash, you can reboot in safe mode, where the diot driver does not do anything
+ . loading the driver:
+  . currently, the driver is installed by using osrloader.exe
+   . http://www.osronline.com/article.cfm?article=157
+   . run osrloader, select diot.sys, click register and then start service
+   . you may choose to load the driver as a boot one so that it can see events as soon as
+   the system starts. in that case, place in in c:\windows\system32\drivers\.
+ . then, from a command prompt, run diot.exe:
+  . diot.exe (-{m|p}:firstByte-lastByte)+
+   . -m for memory mapped range
+   . -p for ioport range
+  . device associated resources are seen by using the windows device manager
+  . disabling then enabling the device should start the tracing
+
+. bugs and limitations
+ . only tested on windows xp sp2
+ . not every instructions are supported
+ . driver cannot unload (well, it unloads sometimes)
+ . real mapping is longer than the wanted one
+ . io port tracing may not be possible if direct insn are used
+
+. links
+ . http://msdn.microsoft.com/en-us/library/aa278874(VS.60).aspx
+ . http://v3vee.org/wiov08.pdf
+ . http://nouveau.freedesktop.org/wiki/MmioTraceLogFormat

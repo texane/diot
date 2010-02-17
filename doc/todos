@@ -1,0 +1,8 @@
+. todos
+ . the current version may not work, new dual thread system not tested at all
+ . print the event count fetched by the userland every time, adjust accordingly
+
+ . event timestamp
+ . diot -i should install the driver
+ . diot -l should list device resources
+ . remember the range in the registrry so that can act at boot time

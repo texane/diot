@@ -1,0 +1,10 @@
+. some device resource ranges
+ . intel 82562v
+  . dfde0000-dfdfffff
+  . dfddb000-dfddbfff
+  . ecc0-ecdf
+ . e1000
+  . f2020000-f203ffff
+  . c040-c07f
+ . dlink airplus
+  . df9f0000-df9fffff

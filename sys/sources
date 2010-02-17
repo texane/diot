@@ -1,0 +1,25 @@
+TARGETNAME=diot
+TARGETTYPE=DRIVER
+TARGETPATH=..\bin
+
+
+MSC_WARNING_LEVEL=/W3
+
+
+C_DEFINES = $(C_DEFINES) /DDIOT_POOL_TAG='TOID' /D__UD_STANDALONE__ /DDIOT_BUILD_SYS
+
+
+TARGETLIBS = \
+udis86\udis86.lib
+
+
+SOURCES = \
+main.c \
+hook.c \
+mmio.c \
+ioport.c \
+com.c \
+eventQueue.c \
+disasm.c \
+Zdisasm.c \
+ia32.c

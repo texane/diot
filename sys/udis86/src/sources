@@ -1,0 +1,23 @@
+TARGETNAME=udis86
+TARGETTYPE=DRIVER_LIBRARY
+TARGETPATH=obj
+
+INCLUDES=..\inc;..\..\..\inc
+
+MSC_WARNING_LEVEL=/W3 /WX
+
+C_DEFINES=$(C_DEFINES) -D__UD_STANDALONE__
+
+SOURCES=\
+mnemonics.c \
+opcmap.c \
+input.c \
+decode.c \
+syn.c \
+syn-intel.c \
+syn-att.c \
+udis86.c
+
+
+
+

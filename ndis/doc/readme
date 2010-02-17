@@ -1,0 +1,3 @@
+. to list interfaces
+ . netsh interface ip show interface
+  . should dump the interface guid
